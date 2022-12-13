@@ -51,9 +51,12 @@ for b in blocks:
 # api.update_status("test status")
 
 client = tweepy.Client()
+
+# tweepy.errors.Unauthorized: 401 Unauthorized
 # allTweets = client.search_all_tweets("Ratio")
 # print(allTweets)
 
+# tweepy.errors.Unauthorized: 401 Unauthorized
 # recentTweets = client.search_recent_tweets("Ratio")
 # print(recentTweets[0])
 
