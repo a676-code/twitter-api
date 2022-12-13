@@ -70,9 +70,45 @@ data = []
 for tweet in public_tweets:
     data.append([tweet.created_at, tweet.user.screen_name, tweet.text])
 
-# print(data)
-
 # Converting list to pandas df
 df = pd.DataFrame(data, columns = columns)
 print(df)
-df.to_csv('tweets.csv')
+df.to_csv('timeline_tweets.csv')
+
+# user tweets #####################################################
+user = 'POTUS'
+limit=300
+
+# old
+# tweets = api.user_timeline(screen_name=user, count=limit, tweet_mode='extended')
+
+user_tweets = tweepy.Cursor(api.user_timeline, screen_name=user, count=200, tweet_mode='extended').items(limit)
+
+columns = ['User', 'Date', 'Tweet']
+data = []
+for tweet in user_tweets:
+    data.append([tweet.user.screen_name, tweet.created_at, tweet.full_text])
+
+df = pd.DataFrame(data, columns=columns)
+
+print(df)
+
+df.to_csv("POTUS_tweets.csv")
+
+# keyword tweets #####################################################
+
+keywords = '@POTUS'
+limit=300
+
+keyword_tweets = tweepy.Cursor(api.search_tweets, q = keywords, count=100, tweet_mode='extended').items(limit)
+
+# create DataFrame
+data = []
+for tweet in keyword_tweets:
+    data.append([tweet.user.screen_name, tweet.created_at, tweet.full_text])
+
+df = pd.DataFrame(data, columns=columns)
+
+print(df)
+
+df.to_csv("tweets_about_POTUS.csv")
