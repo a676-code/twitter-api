@@ -72,8 +72,10 @@ for tweet in public_tweets:
 
 # Converting list to pandas df
 df = pd.DataFrame(data, columns = columns)
+
 print(df)
-df.to_csv('timeline_tweets.csv')
+
+# df.to_csv('timeline_tweets.csv')
 
 # user tweets #####################################################
 user = 'POTUS'
@@ -93,7 +95,7 @@ df = pd.DataFrame(data, columns=columns)
 
 print(df)
 
-df.to_csv("POTUS_tweets.csv")
+# df.to_csv("POTUS_tweets.csv")
 
 # keyword tweets #####################################################
 
@@ -111,4 +113,16 @@ df = pd.DataFrame(data, columns=columns)
 
 print(df)
 
-df.to_csv("tweets_about_POTUS.csv")
+# df.to_csv("tweets_about_POTUS.csv")
+
+tweets = tweepy.Cursor(api.search_tweets, q = keywords, tweet_mode='extended').items(1)
+
+data = []
+for t in tweets:
+    data.append([tweet.user.screen_name, tweet.created_at, tweet.full_text])
+
+df = pd.DataFrame(data, columns=columns)
+
+print(df)
+
+df.to_csv("stuff.csv")

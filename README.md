@@ -1,2 +1,2 @@
 # Twitter API
-This repository contains a script in which I've been playing around with the Twitter API. 
+This repository contains a scripts in which I've been playing around with the Twitter API, including a script that performs sentiment analysis on a set of tweets that the user searched for. 
